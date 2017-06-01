@@ -9,7 +9,7 @@ namespace Statistics.Core.Widgets.Designer
 
         private IDesignerControlCreatorService CreateService()
         {
-            return new DesignerControlCreatorService();
+            return new DesignerControlCreatorService(new NameCreationService());
         }
 
 
@@ -62,7 +62,7 @@ namespace Statistics.Core.Widgets.Designer
             var controlCreator = new Mock<ControlCreator>();
 
             controlCreator
-                .Setup(d => d.Create())
+                .Setup(d => d.Create(Moq.It.Is<INameCreationService>(x => true)))
                 .Returns(() => new DesignerControlDefinition { Control = controlDefinition, Style = cotrnolStyle });
             var service = CreateService();
 

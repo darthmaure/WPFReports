@@ -1,0 +1,19 @@
+﻿<Window x:Class="WPFReports.Views.ResultsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:mod="clr-namespace:Statistics.Core.Widgets;assembly=Statistics.Core.Widgets"
+        xmlns:controls="clr-namespace:WPFReports.Controls"
+        mc:Ignorable="d"
+        Title="Report preview" Height="500" Width="500">
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type mod:WidgetItem}">
+            <Grid DataContext="{Binding}" x:Name="grid">
+                <controls:DisplayControl Grid.Row="2" Margin="2" DataContext="{Binding Path=Context}"  
+                                    Layout="{Binding ElementName=grid, Path=DataContext.Layout}"/>
+            </Grid>
+        </DataTemplate>
+    </Window.Resources>
+    <ContentControl Content="{Binding}" />
+</Window>

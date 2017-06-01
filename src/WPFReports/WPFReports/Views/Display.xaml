@@ -1,0 +1,42 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:WPFReports.Controls"
+                    xmlns:vm="clr-namespace:WPFReports.ViewModels"
+                    xmlns:mod="clr-namespace:Statistics.Core.Widgets;assembly=Statistics.Core.Widgets"
+                    xmlns:resources="clr-namespace:WPFReports.Properties">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+        <ResourceDictionary Source="../Styles/Buttons.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+    <DataTemplate DataType="{x:Type vm:DisplayViewModel}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <DockPanel LastChildFill="True" Grid.Row="0">
+                <Button Style="{StaticResource BackButtonW10}" DockPanel.Dock="Left" Command="{Binding Path=GoBackCommand}"/>
+
+                <Button Content="&#xE11C;" ToolTip="{x:Static resources:Resources.LoadButton}" Style="{StaticResource SimpleButtonW10}" DockPanel.Dock="Right" Command="{Binding Path=LoadCommand}"/>
+                <Button Content="&#xE117;" ToolTip="{x:Static resources:Resources.RefreshButton}" Style="{StaticResource SimpleButtonW10}" DockPanel.Dock="Right" Command="{Binding Path=RefreshCommand}"/>
+
+                <TextBlock Text="{Binding Path=SelectedWidget.Name, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Left" Margin="2" FontSize="21" VerticalAlignment="Center"/>
+            </DockPanel>
+            <mah:FlipView Margin="1" Grid.Column="1" Grid.Row="1" Background="White" 
+                          ItemsSource="{Binding Path=Widgets}" 
+                          SelectedItem="{Binding SelectedWidget, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" 
+                          CircularNavigation="True" IsBannerEnabled="False" IsSynchronizedWithCurrentItem="False">
+                <mah:FlipView.ItemTemplate>
+                    <DataTemplate DataType="{x:Type mod:WidgetItem}">
+                        <Grid DataContext="{Binding}" x:Name="grid">
+                            <controls:DisplayControl Grid.Row="2" Margin="2" DataContext="{Binding Path=Context}"  
+                                    Layout="{Binding ElementName=grid, Path=DataContext.Layout}"/>
+                        </Grid>
+                    </DataTemplate>
+                </mah:FlipView.ItemTemplate>
+            </mah:FlipView>
+        </Grid>
+    </DataTemplate>
+</ResourceDictionary>

@@ -2,9 +2,16 @@
 {
     public class DesignerControlCreatorService : IDesignerControlCreatorService
     {
+        public DesignerControlCreatorService(INameCreationService namingService)
+        {
+            _namingService = namingService;
+        }
+
+        private readonly INameCreationService _namingService;
+
         public string InsertControlSnippet(ControlCreator controlCreator, string layoutDefinition, int currentPosition)
         {
-            var control = controlCreator.Create();
+            var control = controlCreator.Create(_namingService);
 
             var content = layoutDefinition.Insert(currentPosition, control.Control);
 

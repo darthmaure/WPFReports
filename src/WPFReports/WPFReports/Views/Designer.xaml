@@ -1,0 +1,151 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+                    xmlns:vm="clr-namespace:WPFReports.ViewModels"
+                    xmlns:creators="clr-namespace:WPFReports.ControlCreators"
+                    xmlns:behaviors="clr-namespace:WPFReports.Behaviors"
+                    xmlns:resources="clr-namespace:WPFReports.Properties">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+        <ResourceDictionary Source="../Styles/Buttons.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+    <DataTemplate DataType="{x:Type vm:WidgetCompileResultViewModel}">
+        <ItemsControl Margin="0" Background="White" ItemsSource="{Binding Path=Errors}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="30"/>
+                            <ColumnDefinition Width="30"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{Binding Path=Line}" Grid.Column="0"/>
+                        <TextBlock Text="{Binding Path=Column}" Grid.Column="1"/>
+                        <TextBlock Text="{Binding Path=Message}" Grid.Column="2"/>
+                    </Grid>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:WidgetListViewModel}">
+        <Grid Background="White">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                <Button Style="{StaticResource SimpleButtonW10}" Content="&#xE11C;" ToolTip="{x:Static resources:Resources.LoadButton}" Command="{Binding Path=LoadAllCommand}" Margin="1,1,0,1"/>
+                <Button Style="{StaticResource SimpleButtonW10}" Content="&#xE109;" ToolTip="{x:Static resources:Resources.CreateButton}" Command="{Binding Path=CreateNewCommand}" Margin="1,1,0,1"/>
+                <Button Style="{StaticResource SimpleButtonW10}" Content="&#xE105;" ToolTip="{x:Static resources:Resources.SaveButton}" Command="{Binding Path=SaveAllCommand}" Margin="1,1,0,1"/>
+                <Button Style="{StaticResource SimpleButtonW10}" Content="&#xE107;" ToolTip="{x:Static resources:Resources.DeleteButton}" Command="{Binding Path=DeleteSelectedCommand}" Margin="1,1,0,1"/>
+            </StackPanel>
+            <ListBox Grid.Row="1" Margin="1" ItemsSource="{Binding Path=Widgets}" SelectedItem="{Binding Path=SelectedWidget}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Margin="1" Text="{Binding Path=Name}" ToolTip="{Binding Path=Description}"/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:DesignerViewModel}">
+        <Grid Background="White">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+
+            <StackPanel Grid.Row="0" Orientation="Horizontal" Grid.ColumnSpan="2">
+                <Button Content="&#xE102;" ToolTip="{x:Static resources:Resources.CompileButton}" Style="{StaticResource SimpleButtonW10}" DockPanel.Dock="Right" Command="{Binding Path=CompileSelectedCommand}"/>
+                <Button Content="&#xE12A;" ToolTip="{x:Static resources:Resources.PreviewButton}" Style="{StaticResource SimpleButtonW10}" DockPanel.Dock="Right" Command="{Binding Path=RunSelectedWidgetCommand}"/>
+            </StackPanel>
+            
+            <DockPanel Grid.Row="1" Margin="1,0">
+                <TextBlock Margin="1" Text="{x:Static resources:Resources.WidgetNameLabel}" VerticalAlignment="Center"/>
+                <TextBox Margin="1" FontSize="12" Text="{Binding Path=SelectedWidget.Name}"/>
+            </DockPanel>
+            <mah:MetroTabControl Grid.Row="2" Margin="1">
+                <mah:MetroTabItem Header="{x:Static resources:Resources.LayoutTab}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBox Margin="1" AcceptsReturn="True" AcceptsTab="True" Text="{Binding Path=SelectedWidgetLayout}"
+                                 HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible"
+                                 behaviors:TextBoxCursorPositionBehavior.TrackCaretIndex="True"
+                                 behaviors:TextBoxCursorPositionBehavior.CursorPosition="{Binding Path=LayoutCaretPosition, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+                        <Border Grid.Column="1" BorderBrush="Gray" BorderThickness="1" Margin="1" Width="84">
+                            <StackPanel Orientation="Vertical">
+                                <Button Style="{StaticResource ListItemButtonW10}"
+                                        Content="{x:Static resources:Snippets.HeaderControlLabel}"  
+                                        Command="{Binding Path=InsertControlCommand}">
+                                    <Button.CommandParameter>
+                                        <creators:HeaderControlCreator/>
+                                    </Button.CommandParameter>
+                                </Button>
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+                </mah:MetroTabItem>
+                <mah:MetroTabItem Header="{x:Static resources:Resources.CodeTab}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <TextBox Margin="1" AcceptsReturn="True" AcceptsTab="True" Text="{Binding Path=SelectedWidgetCode}" 
+                                 HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible"
+                                 behaviors:TextBoxCursorPositionBehavior.TrackCaretIndex="True"
+                                 behaviors:TextBoxCursorPositionBehavior.CursorPosition="{Binding Path=CodeCaretPosition, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+                        <Border Grid.Column="1" BorderBrush="Gray" BorderThickness="1" Margin="1" Width="84">
+                            <StackPanel Orientation="Vertical">
+                                <Button Style="{StaticResource ListItemButtonW10}"
+                                        Content="{x:Static resources:Snippets.ViewModelPropertySnippetName}"  
+                                        Command="{Binding Path=InsertCodeSnippetCommand}"
+                                        CommandParameter="{x:Static resources:Snippets.ViewModelPropertySnippet}"/>
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+                </mah:MetroTabItem>
+            </mah:MetroTabControl>
+        </Grid>
+    </DataTemplate>
+
+
+    <DataTemplate DataType="{x:Type vm:DesignerHostViewModel}">
+        <Grid Background="Gray">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto" MinHeight="50"/>
+            </Grid.RowDefinitions>
+
+            <DockPanel Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Background="White" LastChildFill="False">
+                <Button Style="{StaticResource BackButtonW10}" DockPanel.Dock="Left" Command="{Binding Path=GoBackCommand}"/>
+            </DockPanel>
+
+            <ContentControl Content="{Binding Path=List}" Grid.Column="0" Grid.Row="1" Grid.RowSpan="3"  Margin="2,2,1,2" Background="White"/>
+
+            <ContentControl Content="{Binding Path=Designer}" Grid.Row="1" Grid.Column="1" Margin="1,2,2,1" Background="White"/>
+
+            <GridSplitter Grid.Column="1" Grid.Row="2" Height="6" HorizontalAlignment="Stretch" ResizeDirection="Rows" Background="White" Margin="1,1,2,1"/>
+            
+            <ContentControl Content="{Binding Path=Results}"  Grid.Column="1" Grid.Row="3" Margin="1,1,2,2"/>
+        </Grid>
+    </DataTemplate>
+</ResourceDictionary>

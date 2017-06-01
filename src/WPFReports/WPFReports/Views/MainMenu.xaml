@@ -1,0 +1,20 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:resources="clr-namespace:WPFReports.Properties"
+                    xmlns:vm="clr-namespace:WPFReports.ViewModels">
+    <DataTemplate DataType="{x:Type vm:MainViewModel}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="1" HorizontalAlignment="Center" Text="{x:Static resources:Resources.MainMenuLabel}"/>
+            <Button Grid.Row="2" HorizontalAlignment="Center" Margin="2" Width="100" Content="{x:Static resources:Resources.DesignerButton}" Command="{Binding Path=GoToDesignerCommand}"/>
+            <Button Grid.Row="3" HorizontalAlignment="Center" Margin="2" Width="100" Content="{x:Static resources:Resources.DisplayButton}" Command="{Binding Path=GoToDisplayCommand}"/>
+        </Grid>
+    </DataTemplate>
+</ResourceDictionary>

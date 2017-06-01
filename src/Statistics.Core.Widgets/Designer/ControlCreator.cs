@@ -2,6 +2,6 @@
 {
     public abstract class ControlCreator
     {
-        public abstract DesignerControlDefinition Create();
+        public abstract DesignerControlDefinition Create(INameCreationService namingService);
     }
 }

@@ -3,10 +3,16 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WPFReports"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="Reports sample" Height="600" Width="700"
+        DataContext="{Binding Source={StaticResource locator}, Path=Shell}">
     <Grid>
+        <mah:TransitioningContentControl Content="{Binding Path=Content}" Transition="LeftReplace"/>
         
+        <Border Background="LightGray" Visibility="{Binding Path=IsBusy, Converter={StaticResource booleanToVisibilityConverter}}">
+            <mah:MetroProgressBar IsIndeterminate="True" VerticalAlignment="Center" HorizontalAlignment="Stretch"
+                                  Height="10" Margin="0"/>
+        </Border>
     </Grid>
 </Window>
