@@ -27,6 +27,33 @@ The solution contains two projects
 
 * WPFReports - this is an sample projects that shows how to use widgets library. I tried to use SOLID principles and MVVM. I put here some examples of real life WPF solutions (converters, navigation service, notification service, styles, behavior to bind CLR property of textbox etc.).
 
+# Screenshots
+Main menu
+
+# other
+
+![Main menu](https://github.com/darthmaure/WPFReports/blob/master/src/Images/MainMenu.PNG "Main menu")
+
+Loading items in view mode
+
+![Laoding](https://github.com/darthmaure/WPFReports/blob/master/src/Images/LoadingItems.PNG "Loading items in view mode")
+
+Display page. Simple widget with custom WPF control
+
+![Display](https://github.com/darthmaure/WPFReports/blob/master/src/Images/Display.PNG "Display page. Simple widget with custom WPF control")
+
+Designer. Report code
+
+![Designer](https://github.com/darthmaure/WPFReports/blob/master/src/Images/DesignerCode.PNG "Designer. Report code")
+
+Designer. Report layout XAML code
+
+![Designer 2](https://github.com/darthmaure/WPFReports/blob/master/src/Images/DesignerLayout.PNG "Designer. Report layout XAML code")
+
+Designer. Preview of created report
+
+![Designer 3](https://github.com/darthmaure/WPFReports/blob/master/src/Images/DesignerPreview.PNG "Designer. Preview of created report")
+
 
 # License
 ?
