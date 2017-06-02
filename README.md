@@ -1,5 +1,5 @@
 # WPFReports
-It is a simple WPF application showing how to write custom XAML/C# reports (or widgets - I just use both names). External packages/libraries used:
+It is a simple WPF application showing how to write custom XAML/C# reports (or widgets - I just use both names). It also show some WPF/C# methods and solutions.
 
 
 # Getting started
