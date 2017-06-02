@@ -30,8 +30,6 @@ The solution contains two projects
 # Screenshots
 Main menu
 
-# other
-
 ![Main menu](https://github.com/darthmaure/WPFReports/blob/master/src/Images/MainMenu.PNG "Main menu")
 
 Loading items in view mode
