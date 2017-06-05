@@ -7,7 +7,7 @@ Clone the repository. Build solution and simple run using F5.
 
 
 # Built with
-* MVVMLigh - most popular MVVM framework, mvvmlight.net
+* MVVMLight - most popular MVVM framework, mvvmlight.net
 
 * MahApps.Metro - my favorite library of pretty controls, mahapps.com
 
